@@ -27,5 +27,9 @@ private:
     Ui::MainWindow *ui;
     QString data_file_full_path;
     Spline spline;
+    void SetupGraph();
+    void PlotGraph(std::vector<Polynome> polynomes);
+    void PlotInputPoints(std::vector<QPoint> points);
+    void Plot();
 };
 #endif // MAINWINDOW_H
