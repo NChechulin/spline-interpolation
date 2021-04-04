@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include "qcustomplot.h"
 #include "spline.h"
 
 QT_BEGIN_NAMESPACE

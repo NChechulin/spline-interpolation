@@ -1,5 +1,6 @@
 #include "spline.h"
 #include "polynome.h"
+#include <QTextStream>
 #include <fstream>
 #include <vector>
 #include <cmath>
