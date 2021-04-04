@@ -15,6 +15,7 @@ private:
 public:
     Spline() {};
     static Spline FromFile(QString);
+    std::vector<Polynome> Interpolate();
 };
 
 #endif // SPLINE_H
