@@ -1,4 +1,5 @@
 QT       += core gui
+QT       += printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,11 +13,13 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     polynome.cpp \
+    qcustomplot.cpp \
     spline.cpp
 
 HEADERS += \
     mainwindow.h \
     polynome.h \
+    qcustomplot.h \
     spline.h
 
 FORMS += \
