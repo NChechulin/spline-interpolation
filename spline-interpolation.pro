@@ -10,10 +10,14 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    polynome.cpp \
+    spline.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    polynome.h \
+    spline.h
 
 FORMS += \
     mainwindow.ui
