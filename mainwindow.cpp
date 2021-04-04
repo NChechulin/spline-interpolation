@@ -1,12 +1,12 @@
 #include "mainwindow.h"
+#include "spline.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QMessageBox>
-#include "spline.h"
 
 const double STEP = 1e-2;
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -18,7 +18,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::SetupGraph() {
+void MainWindow::SetupGraph()
+{
     // for splines
     this->ui->customPlot->addGraph();
     // for points
@@ -31,7 +32,8 @@ void MainWindow::SetupGraph() {
     this->ui->customPlot->yAxis->setLabel("y");
 }
 
-void MainWindow::PlotGraph(std::vector<Polynome> polynomes) {
+void MainWindow::PlotGraph(std::vector<Polynome> polynomes)
+{
     QVector<double> xs, ys;
 
     for (Polynome p : polynomes) {
@@ -51,7 +53,8 @@ void MainWindow::PlotGraph(std::vector<Polynome> polynomes) {
     this->ui->customPlot->yAxis->setRange(*y_minmax.first - 1, *y_minmax.second + 1);
 }
 
-void MainWindow::PlotInputPoints(std::vector<QPoint> points) {
+void MainWindow::PlotInputPoints(std::vector<QPoint> points)
+{
     QVector<double> xs, ys;
     for (QPoint p : points) {
         xs.push_back(p.x());
@@ -61,7 +64,8 @@ void MainWindow::PlotInputPoints(std::vector<QPoint> points) {
     this->ui->customPlot->graph(1)->setData(xs, ys);
 }
 
-void MainWindow::Plot() {
+void MainWindow::Plot()
+{
     SetupGraph();
     PlotGraph(this->spline.Interpolate());
     PlotInputPoints(this->spline.points);
@@ -70,7 +74,7 @@ void MainWindow::Plot() {
 
 void MainWindow::on_loadFileButton_clicked()
 {
-    QFileInfo full_path(QFileDialog::getOpenFileName(this,  tr("Open file with points")));
+    QFileInfo full_path(QFileDialog::getOpenFileName(this, tr("Open file with points")));
     QString file_name = full_path.fileName();
     this->ui->fileLoadedStatusLabel->setText("Loaded " + file_name);
     this->data_file_full_path = full_path.filePath();
