@@ -10,6 +10,7 @@ public:
     // boundaries
     double from, to;
 
+    Polynome();
     Polynome(double a, double b, double c, double d);
     Polynome GetDerivative() const;
 };
