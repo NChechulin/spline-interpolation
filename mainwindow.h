@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include "spline.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,8 +20,11 @@ public:
 private slots:
     void on_loadFileButton_clicked();
 
+    void on_calculateInterpolationButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString data_file_full_path;
+    Spline spline;
 };
 #endif // MAINWINDOW_H
