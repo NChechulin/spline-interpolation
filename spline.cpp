@@ -1,7 +1,5 @@
 #include "spline.h"
 #include <fstream>
-#include <QMessageBox>
-
 
 
 Spline Spline::FromFile(QString path) {
@@ -9,7 +7,7 @@ Spline Spline::FromFile(QString path) {
 
     QFile file(path);
     if(!file.open(QIODevice::ReadOnly)) {
-        QMessageBox::information(0, "Error while opening a file", file.errorString());
+        throw std::runtime_error(file.errorString().toStdString());
     }
 
     QTextStream in(&file);
