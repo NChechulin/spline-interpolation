@@ -25,7 +25,7 @@ void MainWindow::on_loadFileButton_clicked()
         Spline s = Spline::FromFile(full_path.filePath());
         // if no exceptions were caught, we can change UI
         this->ui->fileLoadedStatusLabel->setText("Loaded " + file_name);
-        this->full_path = full_path.filePath();
+        this->data_file_full_path = full_path.filePath();
     }
     catch (std::exception& e) {
         QMessageBox msg;
