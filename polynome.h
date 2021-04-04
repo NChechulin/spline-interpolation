@@ -13,6 +13,7 @@ public:
     Polynome();
     Polynome(double a, double b, double c, double d);
     Polynome GetDerivative() const;
+    double GetValue(double x) const;
 };
 
 #endif // POLYNOME_H
