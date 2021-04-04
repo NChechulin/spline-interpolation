@@ -21,6 +21,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QFileInfo full_path;
+    QString full_path;
 };
 #endif // MAINWINDOW_H
