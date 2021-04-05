@@ -8,6 +8,7 @@ If the number of points is less than 3 or if there are at least 2 points with th
 ## Screenshots
 
 Plot constructed using the sample file (`points.txt`)
+On the left there's result of some [online tool](https://tools.timodenk.com/cubic-spline-interpolation) and the output of my program is on the right.
 
 ![](https://i.imgur.com/sSLk9dh.png)
 
