@@ -12,8 +12,6 @@ class Polynomial {
   Polynomial();
   Polynomial(double a, double b, double c, double d);
   static Polynomial GetCoefficientsFromVector(std::vector<double>::iterator);
-  void InsertCoefficientsIntoVector(std::vector<double>::iterator) const;
-  Polynomial GetDerivative() const;
   double GetValue(double x) const;
 };
 
