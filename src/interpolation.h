@@ -3,7 +3,7 @@
 
 #include <QFileInfo>
 #include <QPoint>
-#include <polynomial.h>
+#include "polynomial.h"
 #include <vector>
 
 class Interpolation {
