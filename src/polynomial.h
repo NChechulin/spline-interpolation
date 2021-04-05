@@ -1,5 +1,6 @@
 #ifndef POLYNOMIAL_H
 #define POLYNOMIAL_H
+#include <vector>
 
 class Polynomial {
  public:
@@ -10,6 +11,8 @@ class Polynomial {
 
   Polynomial();
   Polynomial(double a, double b, double c, double d);
+  static Polynomial GetCoefficientsFromVector(std::vector<double>::iterator);
+  void InsertCoefficientsIntoVector(std::vector<double>::iterator) const;
   Polynomial GetDerivative() const;
   double GetValue(double x) const;
 };
