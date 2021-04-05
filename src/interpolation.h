@@ -13,7 +13,7 @@ class Interpolation {
  public:
   Interpolation(){};
   static Interpolation FromFile(QString);
-  std::vector<QPoint> points;
+  std::vector<QPointF> points;
   std::vector<Polynomial> Interpolate();
 };
 

@@ -1,11 +1,11 @@
 #include "interpolation.h"
-
 #include <QTextStream>
 #include <cmath>
 #include <fstream>
 #include <vector>
-
 #include "polynomial.h"
+
+const double EPS = 1e-6;
 
 Interpolation Interpolation::FromFile(QString path) {
   Interpolation result;
@@ -22,14 +22,14 @@ Interpolation Interpolation::FromFile(QString path) {
 
     QStringList fields = line.split(' ');
     if (fields.length() == 2) {
-      QPoint point(fields[0].toDouble(), fields[1].toDouble());
+      QPointF point(fields[0].toDouble(), fields[1].toDouble());
       result.points.push_back(point);
     }
   }
   file.close();
 
   std::sort(result.points.begin(), result.points.end(),
-            [](QPoint a, QPoint b) { return (a.x() < b.x()); });
+            [](QPointF a, QPointF b) { return (a.x() < b.x()); });
 
   result.check_points();
   return result;
@@ -41,7 +41,7 @@ void Interpolation::check_points() const {
   }
 
   for (size_t i = 0; i < this->points.size() - 1; ++i) {
-    if (points[i].x() == points[i + 1].x()) {
+    if (std::abs(points[i].x() - points[i + 1].x()) < EPS) {
       throw std::range_error(
           "There are at least 2 points with the same X coordinate");
     }
@@ -93,7 +93,7 @@ std::vector<Polynomial> Interpolation::Interpolate() {
 
   // splines through equations
   for (size_t functionNr = 0; functionNr < size - 1; functionNr++, row++) {
-    QPoint p0 = this->points[functionNr], p1 = this->points[functionNr + 1];
+    QPointF p0 = this->points[functionNr], p1 = this->points[functionNr + 1];
     matrix[row][functionNr * 4 + 0] = std::pow(p0.x(), 3);
     matrix[row][functionNr * 4 + 1] = std::pow(p0.x(), 2);
     matrix[row][functionNr * 4 + 2] = p0.x();
@@ -109,7 +109,7 @@ std::vector<Polynomial> Interpolation::Interpolate() {
 
   // first derivative
   for (size_t functionNr = 0; functionNr < size - 2; functionNr++, row++) {
-    QPoint p1 = this->points[functionNr + 1];
+    QPointF p1 = this->points[functionNr + 1];
     matrix[row][functionNr * 4 + 0] = std::pow(p1.x(), 2) * 3;
     matrix[row][functionNr * 4 + 1] = p1.x() * 2;
     matrix[row][functionNr * 4 + 2] = 1;
@@ -120,7 +120,7 @@ std::vector<Polynomial> Interpolation::Interpolate() {
 
   // second derivative
   for (size_t functionNr = 0; functionNr < size - 2; functionNr++, row++) {
-    QPoint p1 = this->points[functionNr + 1];
+    QPointF p1 = this->points[functionNr + 1];
     matrix[row][functionNr * 4 + 0] = p1.x() * 6;
     matrix[row][functionNr * 4 + 1] = 2;
     matrix[row][functionNr * 4 + 4] = p1.x() * -6;

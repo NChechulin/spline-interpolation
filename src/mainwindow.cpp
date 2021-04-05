@@ -51,9 +51,9 @@ void MainWindow::PlotGraph(std::vector<Polynomial> polynomes) {
                                         *y_minmax.second + 1);
 }
 
-void MainWindow::PlotInputPoints(std::vector<QPoint> points) {
+void MainWindow::PlotInputPoints(std::vector<QPointF> points) {
   QVector<double> xs, ys;
-  for (QPoint p : points) {
+  for (QPointF p : points) {
     xs.push_back(p.x());
     ys.push_back(p.y());
   }

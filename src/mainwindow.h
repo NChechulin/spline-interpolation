@@ -31,7 +31,7 @@ class MainWindow : public QMainWindow {
   Interpolation spline;
   void SetupGraph();
   void PlotGraph(std::vector<Polynomial> polynomes);
-  void PlotInputPoints(std::vector<QPoint> points);
+  void PlotInputPoints(std::vector<QPointF> points);
   void Plot();
 };
 #endif  // MAINWINDOW_H
