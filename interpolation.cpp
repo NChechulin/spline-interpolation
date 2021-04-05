@@ -88,12 +88,13 @@ void RREF(std::vector<std::vector<double>>& mat)
 
 std::vector<Polynome> Interpolation::Interpolate()
 {
-    int solution_index = (this->points.size() - 1) * 4;
-    int row = 0;
+    size_t size = this->points.size();
+    size_t solution_index = (size - 1) * 4;
+    size_t row = 0;
     std::vector<std::vector<double>> matrix(solution_index, std::vector<double>(solution_index + 1, 0));
 
     // splines through equations
-    for (size_t functionNr = 0; functionNr < this->points.size() - 1; functionNr++, row++) {
+    for (size_t functionNr = 0; functionNr < size - 1; functionNr++, row++) {
         QPoint p0 = this->points[functionNr], p1 = this->points[functionNr + 1];
         matrix[row][functionNr * 4 + 0] = std::pow(p0.x(), 3);
         matrix[row][functionNr * 4 + 1] = std::pow(p0.x(), 2);
@@ -109,7 +110,7 @@ std::vector<Polynome> Interpolation::Interpolate()
     }
 
     // first derivative
-    for (size_t functionNr = 0; functionNr < this->points.size() - 2; functionNr++, row++) {
+    for (size_t functionNr = 0; functionNr < size - 2; functionNr++, row++) {
         QPoint p1 = this->points[functionNr + 1];
         matrix[row][functionNr * 4 + 0] = std::pow(p1.x(), 2) * 3;
         matrix[row][functionNr * 4 + 1] = p1.x() * 2;
@@ -120,7 +121,7 @@ std::vector<Polynome> Interpolation::Interpolate()
     }
 
     // second derivative
-    for (size_t functionNr = 0; functionNr < this->points.size() - 2; functionNr++, row++) {
+    for (size_t functionNr = 0; functionNr < size - 2; functionNr++, row++) {
         QPoint p1 = this->points[functionNr + 1];
         matrix[row][functionNr * 4 + 0] = p1.x() * 6;
         matrix[row][functionNr * 4 + 1] = 2;
@@ -130,7 +131,7 @@ std::vector<Polynome> Interpolation::Interpolate()
 
     matrix[row][0 + 0] = this->points[0].x() * 6;
     matrix[row++][0 + 1] = 2;
-    matrix[row][solution_index - 4 + 0] = this->points[this->points.size() - 1].x() * 6;
+    matrix[row][solution_index - 4 + 0] = this->points[size - 1].x() * 6;
     matrix[row][solution_index - 4 + 1] = 2;
 
     RREF(matrix);
