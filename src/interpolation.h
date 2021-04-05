@@ -3,18 +3,17 @@
 
 #include <QFileInfo>
 #include <QPoint>
-#include <polynome.h>
+#include "polynomial.h"
 #include <vector>
 
-class Spline {
+class Interpolation {
 private:
-    std::vector<Polynome> polynomes;
     void check_points() const; // raises exception if something is wrong
 public:
-    Spline() {};
-    static Spline FromFile(QString);
+    Interpolation() {};
+    static Interpolation FromFile(QString);
     std::vector<QPoint> points;
-    std::vector<Polynome> Interpolate();
+    std::vector<Polynomial> Interpolate();
 };
 
 #endif // SPLINE_H

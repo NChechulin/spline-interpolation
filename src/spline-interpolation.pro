@@ -12,21 +12,18 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    polynome.cpp \
+    polynomial.cpp \
     qcustomplot.cpp \
-    spline.cpp
+    interpolation.cpp
 
 HEADERS += \
     mainwindow.h \
-    polynome.h \
+    polynomial.h \
     qcustomplot.h \
-    spline.h
+    interpolation.h
 
 FORMS += \
     mainwindow.ui
-
-TRANSLATIONS += \
-    spline-interpolation_en_US.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include "qcustomplot.h"
-#include "spline.h"
+#include "interpolation.h"
 #include <QFileDialog>
 #include <QMainWindow>
 
@@ -27,9 +27,9 @@ private slots:
 private:
     Ui::MainWindow* ui;
     QString data_file_full_path;
-    Spline spline;
+    Interpolation spline;
     void SetupGraph();
-    void PlotGraph(std::vector<Polynome> polynomes);
+    void PlotGraph(std::vector<Polynomial> polynomes);
     void PlotInputPoints(std::vector<QPoint> points);
     void Plot();
 };

@@ -1,13 +1,13 @@
-#include "spline.h"
-#include "polynome.h"
+#include "interpolation.h"
+#include "polynomial.h"
 #include <QTextStream>
 #include <cmath>
 #include <fstream>
 #include <vector>
 
-Spline Spline::FromFile(QString path)
+Interpolation Interpolation::FromFile(QString path)
 {
-    Spline result;
+    Interpolation result;
 
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly)) {
@@ -35,7 +35,7 @@ Spline Spline::FromFile(QString path)
     return result;
 }
 
-void Spline::check_points() const
+void Interpolation::check_points() const
 {
     if (this->points.size() <= 2) {
         throw std::length_error("Less than 3 points were provided");
@@ -86,14 +86,15 @@ void RREF(std::vector<std::vector<double>>& mat)
     }
 }
 
-std::vector<Polynome> Spline::Interpolate()
+std::vector<Polynomial> Interpolation::Interpolate()
 {
-    int solution_index = (this->points.size() - 1) * 4;
-    int row = 0;
+    size_t size = this->points.size();
+    size_t solution_index = (size - 1) * 4;
+    size_t row = 0;
     std::vector<std::vector<double>> matrix(solution_index, std::vector<double>(solution_index + 1, 0));
 
     // splines through equations
-    for (size_t functionNr = 0; functionNr < this->points.size() - 1; functionNr++, row++) {
+    for (size_t functionNr = 0; functionNr < size - 1; functionNr++, row++) {
         QPoint p0 = this->points[functionNr], p1 = this->points[functionNr + 1];
         matrix[row][functionNr * 4 + 0] = std::pow(p0.x(), 3);
         matrix[row][functionNr * 4 + 1] = std::pow(p0.x(), 2);
@@ -109,7 +110,7 @@ std::vector<Polynome> Spline::Interpolate()
     }
 
     // first derivative
-    for (size_t functionNr = 0; functionNr < this->points.size() - 2; functionNr++, row++) {
+    for (size_t functionNr = 0; functionNr < size - 2; functionNr++, row++) {
         QPoint p1 = this->points[functionNr + 1];
         matrix[row][functionNr * 4 + 0] = std::pow(p1.x(), 2) * 3;
         matrix[row][functionNr * 4 + 1] = p1.x() * 2;
@@ -120,7 +121,7 @@ std::vector<Polynome> Spline::Interpolate()
     }
 
     // second derivative
-    for (size_t functionNr = 0; functionNr < this->points.size() - 2; functionNr++, row++) {
+    for (size_t functionNr = 0; functionNr < size - 2; functionNr++, row++) {
         QPoint p1 = this->points[functionNr + 1];
         matrix[row][functionNr * 4 + 0] = p1.x() * 6;
         matrix[row][functionNr * 4 + 1] = 2;
@@ -130,19 +131,20 @@ std::vector<Polynome> Spline::Interpolate()
 
     matrix[row][0 + 0] = this->points[0].x() * 6;
     matrix[row++][0 + 1] = 2;
-    matrix[row][solution_index - 4 + 0] = this->points[this->points.size() - 1].x() * 6;
+    matrix[row][solution_index - 4 + 0] = this->points[size - 1].x() * 6;
     matrix[row][solution_index - 4 + 1] = 2;
 
     RREF(matrix);
 
     std::vector<double> coefficients;
-    for (size_t i = 0; i < matrix.size(); i++) {
-        coefficients.push_back(matrix[i][matrix[i].size() - 1]);
+    coefficients.reserve(matrix.size());
+    for (auto & i : matrix) {
+        coefficients.push_back(i[i.size() - 1]);
     }
 
-    std::vector<Polynome> functions;
+    std::vector<Polynomial> functions;
     for (size_t i = 0; i < coefficients.size(); i += 4) {
-        Polynome p;
+        Polynomial p;
         p.a = coefficients[i];
         p.b = coefficients[i + 1];
         p.c = coefficients[i + 2];

@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "spline.h"
+#include "interpolation.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QMessageBox>
@@ -32,11 +32,11 @@ void MainWindow::SetupGraph()
     this->ui->customPlot->yAxis->setLabel("y");
 }
 
-void MainWindow::PlotGraph(std::vector<Polynome> polynomes)
+void MainWindow::PlotGraph(std::vector<Polynomial> polynomes)
 {
     QVector<double> xs, ys;
 
-    for (Polynome p : polynomes) {
+    for (Polynomial p : polynomes) {
         for (double x = p.from; x <= p.to; x += STEP) {
             xs.push_back(x);
             ys.push_back(p.GetValue(x));
@@ -83,7 +83,7 @@ void MainWindow::on_loadFileButton_clicked()
 void MainWindow::on_calculateInterpolationButton_clicked()
 {
     try {
-        this->spline = Spline::FromFile(this->data_file_full_path);
+        this->spline = Interpolation::FromFile(this->data_file_full_path);
         Plot();
     } catch (std::exception& e) {
         QMessageBox msg;
