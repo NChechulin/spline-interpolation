@@ -3,7 +3,7 @@
 
 #include <QFileInfo>
 #include <QPoint>
-#include <polynome.h>
+#include <polynomial.h>
 #include <vector>
 
 class Interpolation {
@@ -13,7 +13,7 @@ public:
     Interpolation() {};
     static Interpolation FromFile(QString);
     std::vector<QPoint> points;
-    std::vector<Polynome> Interpolate();
+    std::vector<Polynomial> Interpolate();
 };
 
 #endif // SPLINE_H

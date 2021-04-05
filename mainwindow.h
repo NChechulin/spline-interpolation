@@ -29,7 +29,7 @@ private:
     QString data_file_full_path;
     Interpolation spline;
     void SetupGraph();
-    void PlotGraph(std::vector<Polynome> polynomes);
+    void PlotGraph(std::vector<Polynomial> polynomes);
     void PlotInputPoints(std::vector<QPoint> points);
     void Plot();
 };

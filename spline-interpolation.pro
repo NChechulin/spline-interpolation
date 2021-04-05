@@ -12,13 +12,13 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    polynome.cpp \
+    polynomial.cpp \
     qcustomplot.cpp \
     interpolation.cpp
 
 HEADERS += \
     mainwindow.h \
-    polynome.h \
+    polynomial.h \
     qcustomplot.h \
     interpolation.h
 

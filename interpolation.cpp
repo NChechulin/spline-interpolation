@@ -1,5 +1,5 @@
 #include "interpolation.h"
-#include "polynome.h"
+#include "polynomial.h"
 #include <QTextStream>
 #include <cmath>
 #include <fstream>
@@ -86,7 +86,7 @@ void RREF(std::vector<std::vector<double>>& mat)
     }
 }
 
-std::vector<Polynome> Interpolation::Interpolate()
+std::vector<Polynomial> Interpolation::Interpolate()
 {
     size_t size = this->points.size();
     size_t solution_index = (size - 1) * 4;
@@ -142,9 +142,9 @@ std::vector<Polynome> Interpolation::Interpolate()
         coefficients.push_back(i[i.size() - 1]);
     }
 
-    std::vector<Polynome> functions;
+    std::vector<Polynomial> functions;
     for (size_t i = 0; i < coefficients.size(); i += 4) {
-        Polynome p;
+        Polynomial p;
         p.a = coefficients[i];
         p.b = coefficients[i + 1];
         p.c = coefficients[i + 2];

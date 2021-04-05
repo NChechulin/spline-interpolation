@@ -32,11 +32,11 @@ void MainWindow::SetupGraph()
     this->ui->customPlot->yAxis->setLabel("y");
 }
 
-void MainWindow::PlotGraph(std::vector<Polynome> polynomes)
+void MainWindow::PlotGraph(std::vector<Polynomial> polynomes)
 {
     QVector<double> xs, ys;
 
-    for (Polynome p : polynomes) {
+    for (Polynomial p : polynomes) {
         for (double x = p.from; x <= p.to; x += STEP) {
             xs.push_back(x);
             ys.push_back(p.GetValue(x));
