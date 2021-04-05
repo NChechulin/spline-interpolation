@@ -137,8 +137,9 @@ std::vector<Polynome> Interpolation::Interpolate()
     RREF(matrix);
 
     std::vector<double> coefficients;
-    for (size_t i = 0; i < matrix.size(); i++) {
-        coefficients.push_back(matrix[i][matrix[i].size() - 1]);
+    coefficients.reserve(matrix.size());
+    for (auto & i : matrix) {
+        coefficients.push_back(i[i.size() - 1]);
     }
 
     std::vector<Polynome> functions;
