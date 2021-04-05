@@ -14,13 +14,13 @@ SOURCES += \
     mainwindow.cpp \
     polynome.cpp \
     qcustomplot.cpp \
-    spline.cpp
+    interpolation.cpp
 
 HEADERS += \
     mainwindow.h \
     polynome.h \
     qcustomplot.h \
-    spline.h
+    interpolation.h
 
 FORMS += \
     mainwindow.ui

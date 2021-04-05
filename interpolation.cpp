@@ -1,13 +1,13 @@
-#include "spline.h"
+#include "interpolation.h"
 #include "polynome.h"
 #include <QTextStream>
 #include <cmath>
 #include <fstream>
 #include <vector>
 
-Spline Spline::FromFile(QString path)
+Interpolation Interpolation::FromFile(QString path)
 {
-    Spline result;
+    Interpolation result;
 
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly)) {
@@ -35,7 +35,7 @@ Spline Spline::FromFile(QString path)
     return result;
 }
 
-void Spline::check_points() const
+void Interpolation::check_points() const
 {
     if (this->points.size() <= 2) {
         throw std::length_error("Less than 3 points were provided");
@@ -86,7 +86,7 @@ void RREF(std::vector<std::vector<double>>& mat)
     }
 }
 
-std::vector<Polynome> Spline::Interpolate()
+std::vector<Polynome> Interpolation::Interpolate()
 {
     int solution_index = (this->points.size() - 1) * 4;
     int row = 0;

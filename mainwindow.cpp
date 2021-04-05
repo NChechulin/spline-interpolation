@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "spline.h"
+#include "interpolation.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QMessageBox>
@@ -83,7 +83,7 @@ void MainWindow::on_loadFileButton_clicked()
 void MainWindow::on_calculateInterpolationButton_clicked()
 {
     try {
-        this->spline = Spline::FromFile(this->data_file_full_path);
+        this->spline = Interpolation::FromFile(this->data_file_full_path);
         Plot();
     } catch (std::exception& e) {
         QMessageBox msg;
