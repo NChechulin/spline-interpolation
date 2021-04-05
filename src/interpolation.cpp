@@ -142,11 +142,7 @@ std::vector<Polynomial> Interpolation::Interpolate() {
 
   std::vector<Polynomial> functions;
   for (size_t i = 0; i < coefficients.size(); i += 4) {
-    Polynomial p;
-    p.a = coefficients[i];
-    p.b = coefficients[i + 1];
-    p.c = coefficients[i + 2];
-    p.d = coefficients[i + 3];
+    Polynomial p = Polynomial::GetCoefficientsFromVector(coefficients.begin() + i);
     p.from = this->points[i / 4].x();
     p.to = this->points[i / 4 + 1].x();
     functions.push_back(p);
