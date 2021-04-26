@@ -2,7 +2,7 @@
 
 ## Task
 
-Implement [cubic spline interpolation](https://en.wikipedia.org/wiki/Spline_interpolation#Algorithm_to_find_the_interpolating_cubic_spline) and draw a graph for a given set of 2-dimensional points
+Implement [cubic spline interpolation](https://en.wikipedia.org/wiki/Spline_interpolation#Algorithm_to_find_the_interpolating_cubic_spline) algorithm and draw resulting a graph for a given set of 2-dimensional points
 
 ## Input file format
 
