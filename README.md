@@ -1,9 +1,27 @@
 # Cubic Spline Inerpolation
 
+## Task
+
+Implement [cubic spline interpolation](https://en.wikipedia.org/wiki/Spline_interpolation#Algorithm_to_find_the_interpolating_cubic_spline) and draw a graph for a given set of 2-dimensional points
+
 ## Input file format
 
 Any text file with `2N` integer or floating point values. It **must not** contain any other data.
 If the number of points is less than 3 or if there are at least 2 points with the same X coordinate the program will show an error messagebox.
+
+Example:
+```
+-87.6083  32.7009
+66.8744   42.2585
+75.6633   44.6086
+-55.5066  28.8486
+46.2896   -12.5529
+-51.2362  21.5556
+78.5095   6.7208
+95.6425   29.2169
+-71.4888  -7.3083
+-84.2601  9.0064
+```
 
 ## Screenshots
 
